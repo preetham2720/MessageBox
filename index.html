@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Message</title>
+</head>
+<style>
+    body{
+        background-color: #A4B4BD;
+        font-family: "Arimo", sans-serif;
+    }
+    .regform{
+        background-color: #2C2E39;
+    }
+    textarea:focus {
+        outline: none;
+        box-shadow: rgb(9, 157, 243) 0px 1px 4px 0px, rgb(9, 157, 243) 0px 0px 0px 1px;
+    }
+    .hidden{
+        display: none;
+    }
+</style>
+<body>
+    <div class="w-screen h-screen flex justify-center items-center">
+        <div class="regform rounded p-3" style="box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);">
+           <h1 class="block text-white text-3xl mb-2">Message</h1>
+           <textarea placeholder="200 characters max" class="block rounded w-96 h-40 p-1" id="inputbox"></textarea>
+           <p class="errormsg text-red-600 hidden">*Character Can't exceed more 200</p>
+           <p class="textcount text-right text-white">0/200</p>
+        </div>
+    </div>
+    <script>
+        var inputbox = document.getElementById("inputbox");
+        var textcount = document.querySelector(".textcount");
+        var errormsg = document.querySelector(".errormsg");
+
+        inputbox.addEventListener("keydown", function(event) {
+            var len = inputbox.value.length;
+            if (len >= 200) {
+                if (event.key !== "Backspace" && event.key !== "Delete" && event.key !== "ArrowLeft" && event.key !== "ArrowRight" && event.key !== "ArrowUp" && event.key !== "ArrowDown") {
+                    event.preventDefault();
+                    errormsg.classList.remove("hidden");
+                }
+            }
+        });
+
+        inputbox.addEventListener("input",function(){
+            var len = inputbox.value.length;
+            if(len < 200){
+                errormsg.classList.add("hidden");
+            }
+            textcount.textContent = len+"/200"
+        })
+
+
+
+    </script> 
+    
+</body>
+</html>
